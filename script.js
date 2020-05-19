@@ -78,10 +78,28 @@ upArrowBtn();
 const gift = () => {
   const fixedGift = document.querySelector('.fixed-gift'),
         gift = document.querySelector('#gift');
+  let opacity;
+
+  // Анимация появления модального окна
+  const formAppearance = function() {
+    opacity = requestAnimationFrame(formAppearance);
+
+    if (gift.style.opacity < 1)
+    gift.style.opacity = +gift.style.opacity + 0.05;
+    else
+      cancelAnimationFrame(opacity);
+  }
 
   fixedGift.addEventListener('click', () => {
-    fixedGift.style.display = 'none';
-    gift.style.display = 'block';
+    // Проверка ширина окна для активации анимации
+    if (document.documentElement.clientWidth > 768) {
+      fixedGift.style.display = 'none';
+      gift.style.opacity = 0;
+      gift.style.display = 'block';
+      requestAnimationFrame(formAppearance);
+    } else {
+      gift.style.display = 'block';
+    }
   });
 
   gift.addEventListener('click', (event) => {
@@ -100,8 +118,28 @@ gift();
 const freeVisit = () => {
   const freeVisit = document.querySelector('.free-visit'),
         freeVisitForm = document.querySelector('#free_visit_form');
+  let opacity;
+  
+  // Анимация появления модального окна
+  const formAppearance = function() {
+    opacity = requestAnimationFrame(formAppearance);
 
-  freeVisit.addEventListener('click', () => freeVisitForm.style.display = 'block');
+    if (freeVisitForm.style.opacity < 1)
+      freeVisitForm.style.opacity = +freeVisitForm.style.opacity + 0.05;
+    else
+      cancelAnimationFrame(opacity);
+  }
+
+  freeVisit.addEventListener('click', () => {
+    // Проверка ширина окна для активации анимации
+    if (document.documentElement.clientWidth > 768) {
+      freeVisitForm.style.opacity = 0;
+      freeVisitForm.style.display = 'block';
+      requestAnimationFrame(formAppearance);
+    } else {
+        freeVisitForm.style.display = 'block';
+    }
+  });
 
   freeVisitForm.addEventListener('click', (event) => {
     if (event.target.closest('.close-btn') ||
@@ -151,3 +189,10 @@ const calculator = () => {
 
 calculator();
 
+// ------------------------------------------------------------
+// Главный слайдер
+const mainSlider = () => {
+
+}
+
+mainSlider();
