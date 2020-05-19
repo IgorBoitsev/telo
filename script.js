@@ -54,3 +54,21 @@ const chooseClubBtn = () => {
 }
 
 chooseClubBtn();
+
+// ------------------------------------------------------------
+// Стрелка возврата наверх
+const upArrowBtn = () => {
+  const toTopBtn = document.querySelector('#totop'),
+        clubs = document.querySelector('#clubs'),
+        clubsToTop = clubs.getBoundingClientRect().top;
+
+  window.addEventListener('scroll', () => {
+    if (document.documentElement.scrollTop > clubsToTop) {
+      toTopBtn.style.display = 'block';
+    } else {
+        toTopBtn.style.display = 'none';
+    }
+  });
+}
+
+upArrowBtn();
