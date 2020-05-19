@@ -72,3 +72,25 @@ const upArrowBtn = () => {
 }
 
 upArrowBtn();
+
+// ------------------------------------------------------------
+// Подарок
+const gift = () => {
+  const fixedGift = document.querySelector('.fixed-gift'),
+        gift = document.querySelector('#gift');
+
+  fixedGift.addEventListener('click', () => {
+    fixedGift.style.display = 'none';
+    gift.style.display = 'block';
+  });
+
+  gift.addEventListener('click', (event) => {
+    if (event.target.closest('.close-btn') ||
+        event.target.closest('.close_icon') ||
+        event.target.closest('.overlay')) {
+      gift.style.display = 'none';
+    }
+  });
+}
+
+gift();
