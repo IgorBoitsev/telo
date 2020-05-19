@@ -210,3 +210,22 @@ const mainSlider = () => {
 
 mainSlider();
 
+// ------------------------------------------------------------
+// Фотогалерея
+const photoGallery = () => {
+  const gallerySlider = document.querySelector('.gallery-slider'),
+        arrowPrev = gallerySlider.querySelector('.prev'),
+        arrowNext = gallerySlider.querySelector('.next'),
+        slides = gallerySlider.querySelectorAll('.slide'),
+        sliderDots = gallerySlider.querySelector('.slider-dots');
+
+  // Вставка кнопок по количеству слайдов
+  for (let i = 0; i < slides.length; i++)
+    sliderDots.insertAdjacentHTML('beforeend', '<li><button></button></li>');
+  sliderDots.querySelectorAll('li')[0].classList.add('slick-active');
+  
+
+  
+}
+
+photoGallery();
