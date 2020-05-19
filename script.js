@@ -157,27 +157,42 @@ freeVisit();
 const calculator = () => {
   const cardOrder = document.querySelector('#card_order'),
         cardTypes = document.querySelectorAll('[name="card-type"]'),
-        // clubNames = document.querySelectorAll('[name="club-name"]'),
+        clubNames = document.querySelectorAll('[name="club-name"]'),
         promocodeName = document.querySelector('[name="promocode-name"]'),
-        priceTotal = document.querySelector('#price-total');
+        priceTotal = document.querySelector('#price-total'),
+        clubValues = {
+          'mozaika' : {'1' : 1999,
+                       '6' : 9990,
+                       '9' : 13900,
+                       '12' : 19900},
+          'schelkovo' : {'1' : 2999,
+                         '6' : 14999,
+                         '9' : 21999,
+                         '12' : 24990}
+        };
 
   // Стоимость по умолчанию
-  priceTotal.textContent = '1000';
+  priceTotal.textContent = '1999';
   
   const countSum = () => {
     let cardTypeValue = 0,
-        // clubNameValue = 0,
+        clubNameValue = 0,
         promocodeNameValue = 1;
+
+    clubNames.forEach(item => {
+      if (item.checked)
+        clubNameValue = item.value;
+    })
 
     cardTypes.forEach(item => {
       if (item.checked)
-        cardTypeValue = +item.value;
+        cardTypeValue = +clubValues[clubNameValue][item.value];
       });
 
     if (promocodeName.value === 'ТЕЛО2019')
       promocodeNameValue = 0.7;
 
-    priceTotal.textContent = 1000 * cardTypeValue * promocodeNameValue;
+    priceTotal.textContent = cardTypeValue * promocodeNameValue;
   }
 
   cardOrder.addEventListener('change', (event) => {
