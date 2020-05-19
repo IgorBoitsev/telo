@@ -3,7 +3,9 @@
 // Бургер меню
 const burgerMenu = () => {
   const menuBtn = document.querySelector('.menu-button').querySelector('img'),
-        popupMenu = document.querySelector('.popup-menu');
+        popupMenu = document.querySelector('.popup-menu'),
+        topMenu = document.querySelector('.top-menu'),
+        head = document.querySelector('.head');
   
   menuBtn.addEventListener('click', () => {
     popupMenu.style.display = 'flex';
@@ -14,10 +16,29 @@ const burgerMenu = () => {
       popupMenu.style.display = 'none';
     }
   });
+
+  // Исходное положение меню относительно верхнего края
+  const topMenuOriginScroll = topMenu.getBoundingClientRect().top;
+
+  const fixedMenu = () => {
+    // Текушее прокрутка
+    let topMenuCurrentScroll = document.documentElement.scrollTop;
+    
+  if (topMenuCurrentScroll > topMenuOriginScroll) {
+      topMenu.style.position = 'fixed';
+      head.style.marginBottom = '59.66px';
+    } else {
+        topMenu.style.position = '';
+        head.style.marginBottom = '';
+    }
+  }
+
+  window.addEventListener('scroll', fixedMenu);
 }
 
 burgerMenu();
 
+// ------------------------------------------------------------
 // Выбор клуба из падающего меню
 const chooseClubBtn = () => {
   const clubsList = document.querySelector('.clubs-list'),
