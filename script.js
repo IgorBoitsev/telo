@@ -113,3 +113,40 @@ const freeVisit = () => {
 }
 
 freeVisit();
+
+// ------------------------------------------------------------
+// Калькулятор
+const calculator = () => {
+  const cardOrder = document.querySelector('#card_order'),
+        cardTypes = document.querySelectorAll('[name="card-type"]'),
+        // clubNames = document.querySelectorAll('[name="club-name"]'),
+        promocodeName = document.querySelector('[name="promocode-name"]'),
+        priceTotal = document.querySelector('#price-total');
+
+  // Стоимость по умолчанию
+  priceTotal.textContent = '1000';
+  
+  const countSum = () => {
+    let cardTypeValue = 0,
+        // clubNameValue = 0,
+        promocodeNameValue = 1;
+
+    cardTypes.forEach(item => {
+      if (item.checked)
+        cardTypeValue = +item.value;
+      });
+
+    if (promocodeName.value === 'ТЕЛО2019')
+      promocodeNameValue = 0.7;
+
+    priceTotal.textContent = 1000 * cardTypeValue * promocodeNameValue;
+  }
+
+  cardOrder.addEventListener('change', (event) => {
+    if (event.target.name === 'card-type' || event.target.name === 'club-name' ||
+        event.target.name === 'promocode-name')
+      countSum()
+  });
+}
+
+calculator();
