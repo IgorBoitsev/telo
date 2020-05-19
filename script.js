@@ -77,85 +77,54 @@ const upArrowBtn = () => {
 
 upArrowBtn();
 
-// ------------------------------------------------------------
-// Подарок
-const gift = () => {
-  const fixedGift = document.querySelector('.fixed-gift'),
-        gift = document.querySelector('#gift');
-  let opacity;
+const showPopup = () => {
+  let popupAnchors = [];
+  // Кнопка бесплатного визита
+  popupAnchors.push(document.querySelector('.open-popup'));
+  // Кнопка "Перезвоните мне"
+  popupAnchors.push(document.querySelector('.fixed-gift'));
+  // Подарок
+  popupAnchors.push(document.querySelector('.callback-btn'));
 
-  // Анимация появления модального окна
-  const formAppearance = function() {
-    opacity = requestAnimationFrame(formAppearance);
 
-    if (gift.style.opacity < 1)
-    gift.style.opacity = +gift.style.opacity + 0.05;
-    else
-      cancelAnimationFrame(opacity);
-  }
+  popupAnchors.forEach(item => {
+    let popup = document.querySelector(`${item.dataset.popup}`);
 
-  fixedGift.addEventListener('click', () => {
-    // Проверка ширина окна для активации анимации
-    if (document.documentElement.clientWidth > 768) {
-      fixedGift.style.display = 'none';
-      gift.style.opacity = 0;
-      gift.style.display = 'block';
-      requestAnimationFrame(formAppearance);
-    } else {
-      gift.style.display = 'block';
-      fixedGift.style.display = 'none';
-    }
-  });
-
-  gift.addEventListener('click', (event) => {
-    if (event.target.closest('.close-btn') ||
-        event.target.closest('.close_icon') ||
-        event.target.closest('.overlay')) {
-      gift.style.display = 'none';
-    }
-  });
-}
-
-gift();
-
-// ------------------------------------------------------------
-// Запись на бесплатный визит
-const freeVisit = () => {
-  const freeVisit = document.querySelector('.free-visit'),
-        freeVisitForm = document.querySelector('#free_visit_form');
-  let opacity;
+    let opacity;
+    // Анимация появления модального окна
+    const popupAppearance = function() {
+      opacity = requestAnimationFrame(popupAppearance);
   
-  // Анимация появления модального окна
-  const formAppearance = function() {
-    opacity = requestAnimationFrame(formAppearance);
-
-    if (freeVisitForm.style.opacity < 1)
-      freeVisitForm.style.opacity = +freeVisitForm.style.opacity + 0.05;
-    else
-      cancelAnimationFrame(opacity);
-  }
-
-  freeVisit.addEventListener('click', () => {
-    // Проверка ширина окна для активации анимации
-    if (document.documentElement.clientWidth > 768) {
-      freeVisitForm.style.opacity = 0;
-      freeVisitForm.style.display = 'block';
-      requestAnimationFrame(formAppearance);
-    } else {
-        freeVisitForm.style.display = 'block';
+      if (popup.style.opacity < 1)
+      popup.style.opacity = +popup.style.opacity + 0.05;
+      else
+        cancelAnimationFrame(opacity);
     }
-  });
 
-  freeVisitForm.addEventListener('click', (event) => {
-    if (event.target.closest('.close-btn') ||
-        event.target.closest('.close_icon') ||
-        event.target.closest('.overlay')) {
-          freeVisitForm.style.display = 'none';
-    }
+    // Появление модального окна
+    item.addEventListener('click', () => {
+      // Проверка ширина окна для активации анимации
+      if (document.documentElement.clientWidth > 768) {
+        popup.style.opacity = 0;
+        popup.style.display = 'block';
+        requestAnimationFrame(popupAppearance(popup));
+      } else {
+        popup.style.display = 'block';
+      }
+    });
+
+    // Закрытие модального окна
+    popup.addEventListener('click', (event) => {
+      if (event.target.closest('.close-btn') ||
+          event.target.closest('.close_icon') ||
+          event.target.closest('.overlay')) {
+      popup.style.display = 'none';
+      }
+    })
   });
 }
 
-freeVisit();
+showPopup();
 
 // ------------------------------------------------------------
 // Калькулятор
@@ -240,3 +209,4 @@ const mainSlider = () => {
 }
 
 mainSlider();
+
