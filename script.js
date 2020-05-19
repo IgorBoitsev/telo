@@ -94,3 +94,22 @@ const gift = () => {
 }
 
 gift();
+
+// ------------------------------------------------------------
+// Запись на бесплатный визит
+const freeVisit = () => {
+  const freeVisit = document.querySelector('.free-visit'),
+        freeVisitForm = document.querySelector('#free_visit_form');
+
+  freeVisit.addEventListener('click', () => freeVisitForm.style.display = 'block');
+
+  freeVisitForm.addEventListener('click', (event) => {
+    if (event.target.closest('.close-btn') ||
+        event.target.closest('.close_icon') ||
+        event.target.closest('.overlay')) {
+          freeVisitForm.style.display = 'none';
+    }
+  });
+}
+
+freeVisit();
