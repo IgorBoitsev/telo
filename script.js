@@ -17,14 +17,18 @@ const burgerMenu = () => {
     }
   });
 
-  // Исходное положение меню относительно верхнего края
-  const topMenuOriginScroll = topMenu.getBoundingClientRect().top;
+  // Исходное положение прилипшего меню, если при перезагрузке страницы уже проскролено
+  if (document.documentElement.scrollTop > head.offsetHeight) {
+    topMenu.style.position = 'fixed';
+    head.style.marginBottom = '59.66px';
+  }
 
+  // Фиксация бургер меню при прокруте
   const fixedMenu = () => {
     // Текушее прокрутка
     let topMenuCurrentScroll = document.documentElement.scrollTop;
     
-  if (topMenuCurrentScroll > topMenuOriginScroll) {
+  if (topMenuCurrentScroll > head.offsetHeight) {
       topMenu.style.position = 'fixed';
       head.style.marginBottom = '59.66px';
     } else {
@@ -99,6 +103,7 @@ const gift = () => {
       requestAnimationFrame(formAppearance);
     } else {
       gift.style.display = 'block';
+      fixedGift.style.display = 'none';
     }
   });
 
