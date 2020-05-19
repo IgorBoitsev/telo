@@ -173,26 +173,35 @@ const calculator = () => {
 
   // Стоимость по умолчанию
   priceTotal.textContent = '1999';
+
+  // Возможность ввода только кириллицы и цифр
+  promocodeName.addEventListener('input', () => {
+    promocodeName.value = promocodeName.value.replace(/[^а-яёА-ЯЁ\d]/g, '');
+  });
   
   const countSum = () => {
     let cardTypeValue = 0,
         clubNameValue = 0,
         promocodeNameValue = 1;
 
+    // Отслеживание выбранного клуба
     clubNames.forEach(item => {
       if (item.checked)
         clubNameValue = item.value;
     })
 
+    // Отслеживание выбранного периода
     cardTypes.forEach(item => {
       if (item.checked)
         cardTypeValue = +clubValues[clubNameValue][item.value];
       });
 
+    // Проверка промокода
     if (promocodeName.value === 'ТЕЛО2019')
       promocodeNameValue = 0.7;
 
-    priceTotal.textContent = cardTypeValue * promocodeNameValue;
+    // Подсчет стоимости
+    priceTotal.textContent = Math.ceil(cardTypeValue * promocodeNameValue);
   }
 
   cardOrder.addEventListener('change', (event) => {
