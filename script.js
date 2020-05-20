@@ -300,3 +300,11 @@ startSlide();
 }
 
 photoGallerySlider();
+
+// ------------------------------------------------------------
+// Слайдер-карусель
+const sliderCarousel = () => {
+  
+}
+
+sliderCarousel();
