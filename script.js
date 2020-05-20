@@ -330,8 +330,6 @@ const sliderCarousel = () => {
     })
   }
 
-
-
   let pressCounter = 0;
 
   // Функция прокрутки слайдов
@@ -365,3 +363,12 @@ const sliderCarousel = () => {
 
 sliderCarousel();
 
+// ------------------------------------------------------------
+// Отправка данных с формы
+const sendForm = () => {
+  const bannerForm = document.querySelectorA('#banner-form');
+
+  
+}
+
+sendForm();
