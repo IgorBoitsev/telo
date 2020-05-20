@@ -103,13 +103,19 @@ const showPopup = () => {
 
     // Появление модального окна
     item.addEventListener('click', () => {
+      console.log();
+      
       // Проверка ширина окна для активации анимации
       if (document.documentElement.clientWidth > 768) {
         popup.style.opacity = 0;
         popup.style.display = 'block';
         requestAnimationFrame(popupAppearance(popup));
+        if (item.classList[0] === 'fixed-gift')
+          document.querySelector('.fixed-gift').style.display = 'none';
       } else {
         popup.style.display = 'block';
+        if (item.classList[0] === 'fixed-gift')
+        document.querySelector('.fixed-gift').style.display = 'none';
       }
     });
 
