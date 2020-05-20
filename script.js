@@ -220,6 +220,9 @@ const photoGallerySlider = () => {
   const gallerySlider = document.querySelector('.gallery-slider'),
         slides = gallerySlider.querySelectorAll('.slide'),
         sliderDots = gallerySlider.querySelector('.slider-dots');
+  
+        console.log(gallerySlider);
+        
 
   // Вставка кнопок по количеству слайдов
   for (let i = 0; i < slides.length; i++)
@@ -418,8 +421,7 @@ const sendForm = () => {
           item.querySelectorAll('input').forEach(elem => elem.value = '')
         })
       
-        // console.log(item.closest);
-        
+      // Скрытие модального окна, если из него идет отправка заявки
       if (item.closest('#callback_form'))
         document.querySelector('#callback_form').style.display = 'none';
 
