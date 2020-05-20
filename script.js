@@ -39,7 +39,6 @@ const burgerMenu = () => {
 
   window.addEventListener('scroll', fixedMenu);
 }
-
 burgerMenu();
 
 // ------------------------------------------------------------
@@ -56,7 +55,6 @@ const chooseClubBtn = () => {
     }
   });
 }
-
 chooseClubBtn();
 
 // ------------------------------------------------------------
@@ -74,9 +72,10 @@ const upArrowBtn = () => {
     }
   });
 }
-
 upArrowBtn();
 
+// ------------------------------------------------------------
+// Модальные окна
 const showPopup = () => {
   let popupAnchors = [];
   // Кнопка бесплатного визита
@@ -130,7 +129,6 @@ const showPopup = () => {
     })
   });
 }
-
 showPopup();
 
 // ------------------------------------------------------------
@@ -216,7 +214,6 @@ const mainSlider = () => {
 
   setInterval(autoPlay, 2000); 
 }
-
 mainSlider();
 
 // ------------------------------------------------------------
@@ -305,9 +302,7 @@ const photoGallerySlider = () => {
 
 startSlide();
 }
-
-// if (document.title === 'Сеть фитнес клубов Тело')
-  photoGallerySlider();
+photoGallerySlider();
 
 // ------------------------------------------------------------
 // Слайдер-карусель
@@ -364,7 +359,6 @@ const sliderCarousel = () => {
     }
   });
 }
-
 sliderCarousel();
 
 // ------------------------------------------------------------
@@ -439,5 +433,4 @@ const sendForm = () => {
       thanks.style.display = 'none';
   });
 }
-
 sendForm();
