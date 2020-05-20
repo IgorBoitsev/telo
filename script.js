@@ -86,7 +86,6 @@ const showPopup = () => {
   // Подарок
   popupAnchors.push(document.querySelector('.callback-btn'));
 
-
   popupAnchors.forEach(item => {
     let popup = document.querySelector(`${item.dataset.popup}`);
 
@@ -103,19 +102,15 @@ const showPopup = () => {
 
     // Появление модального окна
     item.addEventListener('click', () => {
-      console.log();
+      console.log(item);
       
       // Проверка ширина окна для активации анимации
       if (document.documentElement.clientWidth > 768) {
         popup.style.opacity = 0;
         popup.style.display = 'block';
         requestAnimationFrame(popupAppearance(popup));
-        if (item.classList[0] === 'fixed-gift')
-          document.querySelector('.fixed-gift').style.display = 'none';
       } else {
-        popup.style.display = 'block';
-        if (item.classList[0] === 'fixed-gift')
-        document.querySelector('.fixed-gift').style.display = 'none';
+          popup.style.display = 'block';
       }
     });
 
@@ -125,6 +120,9 @@ const showPopup = () => {
           event.target.closest('.close_icon') ||
           event.target.closest('.overlay')) {
       popup.style.display = 'none';
+      //Скрытие подарка
+      if (item.classList.value === 'fixed-gift')
+        item.style.display = 'none';
       }
     })
   });
@@ -366,9 +364,75 @@ sliderCarousel();
 // ------------------------------------------------------------
 // Отправка данных с формы
 const sendForm = () => {
-  const bannerForm = document.querySelectorA('#banner-form');
+  const forms = document.querySelectorAll('form'),
+        bannerForm = document.querySelector('#banner-form'),
+        check1 = bannerForm.querySelector('#check1'),
+        nameInput = bannerForm.querySelector('[name="name"]'),
+        phoneInput = bannerForm.querySelector('[name="phone"]'),
+        sendBtn = bannerForm.querySelector('[name="send"]'),
+        thanks = document.querySelector('#thanks'),
+        thanksH4 = thanks.querySelector('h4'),
+        thanksPar = thanks.querySelector('p');
+    
+  // Запрет ввода символов кроме кириллицы
+  document.querySelectorAll('[name="name"]').forEach(item => {
+    item.addEventListener('input', () => item.value = item.value.replace(/[^а-яёА-ЯЁ]/, ''));
+  })
 
+  // Запрет ввода символов кроме цифр и +
+  document.querySelectorAll('[name="phone"]').forEach(item => {
+    item.addEventListener('input', () => item.value = item.value.replace(/[^+0-9]/, ''));
+  })
+
+  // check1.addEventListener('input', () => console.log(1));
+
+  const postData = (body) => {
+    return fetch('./server.php', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type': 'application/json'
+                 },
+                 body: JSON.stringify(body)
+                });
+  }
+
+  forms.forEach(item => {
+    item.addEventListener('submit', (event) => {
+      event.preventDefault();
   
+      // Получение данных из формы
+      const formData = new FormData(bannerForm);
+      let body = {};
+      formData.forEach((val, key) => body[key] = val);
+  
+      postData(body)
+        .then((response) => {
+          if (response.status != 200)
+            throw new Error('Ошибка 200');
+        })
+        .catch((error) => {
+          thanksH4.textContent = 'Оп!';
+          thanksPar.textContent = 'Возникли непредвиденные обстоятельства';
+        })
+        .finally(() => {
+          item.querySelectorAll('input').forEach(elem => elem.value = '')
+        })
+      
+        // console.log(item.closest);
+        
+      if (item.closest('#callback_form'))
+        document.querySelector('#callback_form').style.display = 'none';
+
+      thanks.style.display = 'block';
+    });
+  })
+
+  thanks.addEventListener('click', (event) => {
+    if (event.target.closest('.overlay') ||
+        event.target.closest('.close_icon') ||
+        event.target.closest('.close-btn'))
+      thanks.style.display = 'none';
+  });
 }
 
 sendForm();
