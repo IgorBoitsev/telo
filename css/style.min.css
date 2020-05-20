@@ -8,11 +8,13 @@ html,body,body div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,ad
 
 #clubs{padding-bottom:50px}#clubs .content{display:-moz-flex;display:-ms-flex;display:-o-flex;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}#clubs .content .left,#clubs .content .right{min-width:280px;text-align:center;border:1px solid rgba(39,25,48,.14);background-color:#fff;margin-bottom:20px}#clubs .content .left{margin-right:20px}#clubs .content .image{position:relative;width:100%}#clubs .content .image img{max-width:100%;height:auto}#clubs .content .club-head{position:absolute;left:50%;top:50%;margin-top:-46px;background:url(../images/club-border-bg.png) no-repeat center;height:92px;width:280px;margin-left:-140px;padding-top:36px}#clubs .content a{text-decoration:none}#clubs .content h3{display:block;width:100%;color:#fff;font-size:2.5rem;font-weight:300;line-height:20px;text-transform:uppercase}#clubs .content .bottom{display:-moz-flex;display:-ms-flex;display:-o-flex;display:-webkit-box;display:-ms-flexbox;display:flex;margin:14px 25px 34px;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}#clubs .content .text{color:#2e2e2e}#clubs .content .text h5{font-size:18px;font-weight:700}#clubs .content .text p{font-size:17px;font-weight:300;line-height:24px}#banner{background:url(../images/banner-bg.png) no-repeat center top;height:262px;color:#fff;text-align:center}#banner h2{color:#fff;margin-top:0;margin-bottom:26px}#banner h2:after{display:none}#banner p.personal-data{margin-top:22px}#banner-form{padding-top:10px;padding-bottom:30px}#banner-form input{font-size:16px;height:45px;width:268px;border-radius:22px;border:none;padding:5px 5px 5px 18px;margin-right:5px}
 
-.services-slider{display:flex;margin:0 auto;padding-left:15px;padding-right:15px;position:relative}
+.services-slider{display:flex;margin:0 auto;padding-left:15px;padding-right:15px;position:relative;overflow:hidden;}
 
-.services-slider .slide{text-align:center;margin-right:6px;margin-left:6px;width:210px; display:none;}
+.services-slider .slide{text-align:center;margin-right:2%;width:210px;flex: 0 0 18.4%;}
 
-.services-slider .slide-active{display:block;}
+
+
+/* .services-slider .slide-active{display:block;} */
 
 .services-slider .slide img{margin:0 auto 19px}
 
