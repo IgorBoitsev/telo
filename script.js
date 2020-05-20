@@ -63,11 +63,11 @@ chooseClubBtn();
 // Стрелка возврата наверх
 const upArrowBtn = () => {
   const toTopBtn = document.querySelector('#totop'),
-        clubs = document.querySelector('#clubs'),
-        clubsToTop = clubs.getBoundingClientRect().top;
+        firstSection = document.querySelector('section'),
+        distToTop = firstSection.getBoundingClientRect().top;
 
   window.addEventListener('scroll', () => {
-    if (document.documentElement.scrollTop > clubsToTop) {
+    if (document.documentElement.scrollTop > distToTop) {
       toTopBtn.style.display = 'block';
     } else {
         toTopBtn.style.display = 'none';
@@ -80,11 +80,14 @@ upArrowBtn();
 const showPopup = () => {
   let popupAnchors = [];
   // Кнопка бесплатного визита
-  popupAnchors.push(document.querySelector('.open-popup'));
+  if (document.querySelector('.open-popup'))
+    popupAnchors.push(document.querySelector('.open-popup'));
   // Кнопка "Перезвоните мне"
-  popupAnchors.push(document.querySelector('.fixed-gift'));
+  if (document.querySelector('.fixed-gift'))
+    popupAnchors.push(document.querySelector('.fixed-gift'));
   // Подарок
-  popupAnchors.push(document.querySelector('.callback-btn'));
+  if (document.querySelector('.callback-btn'))
+    popupAnchors.push(document.querySelector('.callback-btn'));
 
   popupAnchors.forEach(item => {
     let popup = document.querySelector(`${item.dataset.popup}`);
@@ -135,7 +138,7 @@ showPopup();
 const calculator = () => {
   const cardOrder = document.querySelector('#card_order'),
         cardTypes = document.querySelectorAll('[name="card-type"]'),
-        clubNames = document.querySelectorAll('[name="club-name"]'),
+        clubNames = cardOrder.querySelectorAll('[name="club-name"]'),
         promocodeName = document.querySelector('[name="promocode-name"]'),
         priceTotal = document.querySelector('#price-total'),
         clubValues = {
@@ -188,8 +191,8 @@ const calculator = () => {
       countSum()
   });
 }
-
-calculator();
+if (document.title === 'Сеть фитнес клубов Тело')
+  calculator();
 
 // ------------------------------------------------------------
 // Главный слайдер
@@ -198,6 +201,8 @@ const mainSlider = () => {
         mainSlider = document.querySelector('.main-slider'),
         slides = mainSlider.querySelectorAll('.slide');
   let currentSlide = 0;
+  console.log(mainSlider);
+  
   
   const autoPlay = () => {
     slides[currentSlide].style.display = 'none';
@@ -221,9 +226,6 @@ const photoGallerySlider = () => {
         slides = gallerySlider.querySelectorAll('.slide'),
         sliderDots = gallerySlider.querySelector('.slider-dots');
   
-        console.log(gallerySlider);
-        
-
   // Вставка кнопок по количеству слайдов
   for (let i = 0; i < slides.length; i++)
     sliderDots.insertAdjacentHTML('beforeend', '<li class="dot"></li>');
@@ -304,7 +306,8 @@ const photoGallerySlider = () => {
 startSlide();
 }
 
-photoGallerySlider();
+// if (document.title === 'Сеть фитнес клубов Тело')
+  photoGallerySlider();
 
 // ------------------------------------------------------------
 // Слайдер-карусель
