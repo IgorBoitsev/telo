@@ -373,7 +373,7 @@ const sendForm = () => {
 
   // Запрет ввода символов кроме цифр и +
   document.querySelectorAll('[name="phone"]').forEach(item => {
-    item.addEventListener('input', () => item.value = item.value.replace(/[^+0-9]/, ''));
+    item.addEventListener('input', () => item.value = item.value.replace(/[^+0-9 \-()]/, ''));
   })
 
   const postData = (body) => {
@@ -386,22 +386,17 @@ const sendForm = () => {
                 });
   }
 
-  // Проверка установки галочки соглашения обработки персональных данных
-  forms.forEach(item => {
-    item.addEventListener('change', () => {
-      const checkbox = item.querySelector('[type="checkbox"]'),
-            submit = item.querySelector('[type="submit"]');
-
-      if (checkbox && !checkbox.checked)
-        submit.setAttribute('disabled', true);
-        else
-          submit.removeAttribute('disabled');
-    });
-  })
-
   forms.forEach(item => {
     item.addEventListener('submit', (event) => {
       event.preventDefault();
+
+      const checkbox = item.querySelector('[type="checkbox"]');
+
+      // Проверка установки галочки соглашения обработки персональных данных
+      if (checkbox && !checkbox.checked){
+        agreement.style.display = 'block';
+        return;
+      }
 
       // Получение данных из формы
       const formData = new FormData(item);
@@ -422,8 +417,10 @@ const sendForm = () => {
         })
       
       // Скрытие модального окна, если из него идет отправка заявки
-      if (item.closest('#callback_form'))
+      if (item.closest('#callback_form') || item.closest('#free_visit_form')){
         document.querySelector('#callback_form').style.display = 'none';
+        document.querySelector('#free_visit_form').style.display = 'none';
+      }
 
       thanks.style.display = 'block';
     });
