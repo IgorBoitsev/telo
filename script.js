@@ -318,11 +318,19 @@ const sliderCarousel = () => {
       slides.forEach(item => {
         item.style.cssText = 'flex: 0 0 23.6%; transform: translateX(0px); transition: all 0.5s;';
       })
-  } else if (document.documentElement.clientWidth < 600){
-    // 3 слайда на странице
-    slides.forEach(item => {
-      item.style.cssText = 'flex: 0 0 32.3%; transform: translateX(0px); transition: all 0.5s';
-    })
+  } else if (document.documentElement.clientWidth < 600 && document.documentElement.clientWidth >= 400){
+    console.log(1);
+      // 3 слайда на странице
+      slides.forEach(item => {
+        item.style.cssText = 'flex: 0 0 32.3%; transform: translateX(0px); transition: all 0.5s';
+      })
+  } else if (document.documentElement.clientWidth < 400) {
+    console.log(2);
+    
+      // 1 слайд на странице
+      slides.forEach(item => {
+        item.style.cssText = 'flex: 0 0 100%; margin-right: 10%; transform: translateX(0px); transition: all 0.5s';
+      })
   }
 
   let pressCounter = 0;
